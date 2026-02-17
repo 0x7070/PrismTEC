@@ -1,0 +1,13 @@
+[project]
+name = "PrismTEC"
+version = "0.0.1"
+description = "PrismTEC: Threat Enrichment and Correlation Engine"
+authors = [{name="Ielon Raykhelson"}]
+requires-python = ">=3.10"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

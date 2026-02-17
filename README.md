@@ -3,6 +3,18 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 
 ---
 
+## Operational Layers
+
+**Layer 1: Data Ingestion and Normalization**
+- Ingest bulk or isolated threat data (from "predictable structured data")
+  - Supported formats:
+    - `Splunk`, `XSOAR`
+- Reformat ingested data to PrismTEC JSON-Struct
+
+
+
+---
+
 ## Sources for Threat Intelligence Enrichment
 
 | ***Intelligence Focus Area*** | ***Source*** |
