@@ -23,3 +23,9 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 | **Domain** | `VirusTotal`, `Whois` |
 
 ---
+
+## Setup Instructions:
+- Clone this repo
+- Navigate to /PrismTEC/src
+  - Install modules and fix PATH:
+    - `pip install -e .`
