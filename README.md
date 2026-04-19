@@ -19,13 +19,14 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 
 | ***Intelligence Focus Area*** | ***Source*** |
 | --- | --- |
-| **IPv4 Address** | `AbuseIPDB`, `VirusTotal` |
+| **IPv4 Address** | `AbuseIPDB`, `VirusTotal`, `Shodan` |
 | **Domain** | `VirusTotal`, `Whois` |
+| **URL** | `VirusTotal`, `URLScan` |
 
 ---
 
 ## Setup Instructions:
 - Clone this repo
-- Navigate to /PrismTEC/src
+- Navigate to `/PrismTEC/` (where the `pyproject.toml` is located)
   - Install modules and fix PATH:
     - `pip install -e .`
