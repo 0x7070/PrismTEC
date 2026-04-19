@@ -1,4 +1,6 @@
 from prismtec.utils.general.helpers import hrx, hr, clean
+from prismtec.utils.general.indicators import is_ip
+
 import requests, json
 
 __all__ = [
@@ -22,7 +24,7 @@ def build_url(base_url: str, params: list) -> str:
         temp_url += f'/{param}'
     return temp_url
 
-def query(url: str, headers: dict = None, parameters: dict = None) -> requests.models.Response:
+def query(url: str, headers: dict = None, parameters: dict = None) -> str:
     RESPONSE = requests.get(
         url=url,
         headers=headers,
@@ -51,14 +53,17 @@ def dump_json(RESPONSE: requests.models.Response) -> str:
     
 #----------------
 
-def query_virustotal(indicator: None, type: str = 'ip'):
-    type = clean(type)
+def query_virustotal(indicator: None, indicator_type: str = 'ip'):
+    indicator_type = clean(indicator_type)
     
     BASE_URL = None
     HEADERS = None
     PARAMETERS = None
     
-    if type == 'ip':
+    if indicator_type == 'ip':
+        if not is_ip(indicator):
+            raise ValueError(f'Indicator({type(indicator)}) `{indicator}` not a valid IPaddress.')
+        
         BASE_URL = 'https://www.virustotal.com/api/v3/ip_addresses'
         INDICATOR = indicator
         URL = build_url(base_url=BASE_URL,
@@ -74,7 +79,38 @@ def query_virustotal(indicator: None, type: str = 'ip'):
         headers=HEADERS,
         parameters=PARAMETERS
     )
-    print(dump)
+    return dump
+
+def query_abuseipdb(indicator: None, indicator_type: str = 'ip') -> str:
+    indicator_type = clean(indicator_type)
+    
+    BASE_URL = None
+    HEADERS = None
+    PARAMETERS = None
+    
+    if indicator_type == 'ip':
+        if not is_ip(indicator):
+            raise ValueError(f'Indicator({type(indicator)}) `{indicator}` not a valid IPaddress.')
+        
+        BASE_URL = 'https://api.abuseipdb.com/api/v2/check'
+        INDICATOR = indicator
+        
+        # can pass many different parameters based on intended usage
+        PARAMETERS = {
+            'ipAddress': INDICATOR
+        }
+        HEADERS = {
+            'Key': get_api_key(service='AbuseIPDB'),
+            'Accept': 'application/json'
+        }
+        
+    dump = query(
+        url=BASE_URL,
+        headers=HEADERS,
+        parameters=PARAMETERS
+    )
+    return dump
+    
 
 #===
 
@@ -83,9 +119,15 @@ if __name__ == '__main__':
     print(f'{MODULE_NAME} is loaded.')
     hr()
     
-    query_virustotal(
-        indicator='33.33.33.33'
+    # x = query_virustotal(
+    #     indicator='33.31.58.46'
+    # )
+    # print(x)
+    # hrx()
+    aipdb = query_abuseipdb(
+        indicator='99.12.13.4'
     )
+    print(aipdb)
     
 # import requests
 # import json

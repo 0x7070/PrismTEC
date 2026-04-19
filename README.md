@@ -30,3 +30,29 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 - Navigate to `/PrismTEC/` (where the `pyproject.toml` is located)
   - Install modules and fix PATH:
     - `pip install -e .`
+- Add your API keys to `./CONFIG.json`
+
+---
+
+## Relevant Notes:
+
+### Services
+
+**VirusTotal**:
+- (IP-Object return value)[https://docs.virustotal.com/reference/ip-object]
+- (VT API Docs)[https://docs.virustotal.com/reference/ip-info]
+
+**AbuseIPDB**:
+- 
+- AbuseIPDB documentation states the following:
+  - Too many requests result in `HTTP:429 - Too Many Requests`
+  - (API Daily Rate Limits)[https://docs.abuseipdb.com/?python#api-daily-rate-limits]
+  - All API keys should be passed via headers, though they can be passed via parameters as well.
+
+### Other
+
+**IPaddress**:
+- (IPaddress Docs)[https://docs.python.org/3/library/ipaddress.html]
+
+**JSON API Specifications**:
+- (JSON API specs)[https://jsonapi.org/format/#errors]
