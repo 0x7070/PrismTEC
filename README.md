@@ -23,6 +23,19 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 | **Domain** | `VirusTotal`, `Whois` |
 | **URL** | `VirusTotal`, `URLScan` |
 
+IP:
+- Reputation (is this bad):
+  - VirusTotal/AbuseIPDB
+- Infrastructure (what is it):
+  - ipinfo
+- Exposure (what is it doing):
+  - Shodan
+- DNS Relationships (what is it connected to?)
+  - SecurityTrails
+- Context (why does it matter):
+  - GreyNoise (noise vs threat classification)
+  - OTX (campaign context)
+
 ---
 
 ## Setup Instructions:
@@ -43,11 +56,22 @@ PrismTEC: The Prism Threat Enrichment and Correlation engine ingests alerts, nor
 - (VT API Docs)[https://docs.virustotal.com/reference/ip-info]
 
 **AbuseIPDB**:
-- 
+- (AbuseIPDB Docs)[https://docs.abuseipdb.com/?python#introduction]
 - AbuseIPDB documentation states the following:
   - Too many requests result in `HTTP:429 - Too Many Requests`
   - (API Daily Rate Limits)[https://docs.abuseipdb.com/?python#api-daily-rate-limits]
   - All API keys should be passed via headers, though they can be passed via parameters as well.
+
+**IpInfo**:
+- (IpInfo Docs)[https://ipinfo.io/developers/lite-api]
+- [sss](https://shodan.readthedocs.io/en/latest/)
+  - No daily or monthly limit and provides unlimited access
+  - ***Available fields listed in docs***
+  - `/me` in the url is to get information about your own IP
+
+**Shodan**:
+- (Shodan Dashboard)[https://www.shodan.io/dashboard]
+- (Shodan Documentation)[https://shodan.readthedocs.io/en/latest/]
 
 ### Other
 
