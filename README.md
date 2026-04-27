@@ -52,31 +52,32 @@ IP:
 ### Services
 
 **VirusTotal**:
-- (IP-Object return value)[https://docs.virustotal.com/reference/ip-object]
-- (VT API Docs)[https://docs.virustotal.com/reference/ip-info]
+- [IP-Object Return Value](https://docs.virustotal.com/reference/ip-object)
+- [VT API Docs](https://docs.virustotal.com/reference/ip-info)
 
 **AbuseIPDB**:
-- (AbuseIPDB Docs)[https://docs.abuseipdb.com/?python#introduction]
+- [AbuseIPDB Documentation](https://docs.abuseipdb.com/?python#introduction)
 - AbuseIPDB documentation states the following:
   - Too many requests result in `HTTP:429 - Too Many Requests`
-  - (API Daily Rate Limits)[https://docs.abuseipdb.com/?python#api-daily-rate-limits]
+  - [API Daily Rate Limits](https://docs.abuseipdb.com/?python#api-daily-rate-limits)
   - All API keys should be passed via headers, though they can be passed via parameters as well.
 
 **IpInfo**:
-- (IpInfo Docs)[https://ipinfo.io/developers/lite-api]
-- [sss](https://shodan.readthedocs.io/en/latest/)
+- [IpInfo Docs](https://ipinfo.io/developers/lite-api)
   - No daily or monthly limit and provides unlimited access
   - ***Available fields listed in docs***
   - `/me` in the url is to get information about your own IP
 
 **Shodan**:
-- (Shodan Dashboard)[https://www.shodan.io/dashboard]
-- (Shodan Documentation)[https://shodan.readthedocs.io/en/latest/]
+- [Shodan Dashboard](https://www.shodan.io/dashboard)
+- [Shodan Documentation](https://shodan.readthedocs.io/en/latest/)
+  - [Shodan Documentation / Looking up a host](https://shodan.readthedocs.io/en/latest/tutorial.html#looking-up-a-host)
+  - [Shodan Documentation / Functions and Exceptions](https://shodan.readthedocs.io/en/latest/api.html)
 
 ### Other
 
 **IPaddress**:
-- (IPaddress Docs)[https://docs.python.org/3/library/ipaddress.html]
+- [IPaddress Docs](https://docs.python.org/3/library/ipaddress.html)
 
 **JSON API Specifications**:
-- (JSON API specs)[https://jsonapi.org/format/#errors]
+- [JSON API specs](https://jsonapi.org/format/#errors)

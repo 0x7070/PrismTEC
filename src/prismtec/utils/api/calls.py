@@ -95,7 +95,7 @@ def query_abuseipdb(indicator: None, indicator_type: str = 'ip') -> str:
         BASE_URL = 'https://api.abuseipdb.com/api/v2/check'
         INDICATOR = indicator
         
-        # can pass many different parameters based on intended usage
+        # Can pass many different parameters based on intended usage
         PARAMETERS = {
             'ipAddress': INDICATOR
         }
@@ -110,7 +110,46 @@ def query_abuseipdb(indicator: None, indicator_type: str = 'ip') -> str:
         parameters=PARAMETERS
     )
     return dump
+
+def query_ipinfo(indicator: None, indicator_type: str = 'ip', fields: list = ['ip']) -> None:
+    try:
+        import ipinfo
+    except ImportError:
+        print('ERROR:\n- Module `ipinfo` is NOT INSTALLED. Skipping this query...')
+        return None
     
+    indicator_type = clean(indicator_type)
+    
+    if indicator_type == 'ip':
+        if not is_ip(indicator):
+            raise ValueError(f'Indicator({type(indicator)}) `{indicator}` not a valid IPaddress.')
+        
+        handler = ipinfo.getHandlerLite(access_token=get_api_key(service='ipinfo'))
+        details = handler.getDetails(indicator)
+        
+        attributes = {}
+        for field in fields:
+            attributes.update({field: getattr(details, field)})
+            
+        return attributes
+
+def query_shodan(indicator: None, indicator_type: str = 'ip', facets: list = None) -> None:
+    try:
+        import shodan
+    except ImportError:
+        print('ERROR:\n- Module `shodan` is NOT INSTALLED. Skipping this query...')
+        return None
+    
+    indicator_type = clean(indicator_type)
+    
+    if indicator_type == 'ip':
+        if not is_ip(indicator):
+            raise ValueError(f'Indicator({type(indicator)}) `{indicator}` not a valid IPaddress.')
+        
+        SHODAN_API_KEY = get_api_key(service='shodan')
+        api = shodan.Shodan(key=SHODAN_API_KEY)
+        host_information = api.host(indicator)
+        return host_information
 
 #===
 
@@ -119,34 +158,27 @@ if __name__ == '__main__':
     print(f'{MODULE_NAME} is loaded.')
     hr()
     
+
+    # host_info = query_shodan(
+    #     indicator='8.8.8.8'
+    # )
+    # print(host_info)
+    
+    # attributes = query_ipinfo(
+    #     indicator='33.31.58.46',
+    #     fields=[
+    #         'ip',
+    #         'as_name'
+    #     ]
+    # )
+    # print(attributes)
+    
     # x = query_virustotal(
     #     indicator='33.31.58.46'
     # )
     # print(x)
-    # hrx()
-    aipdb = query_abuseipdb(
-        indicator='99.12.13.4'
-    )
-    print(aipdb)
     
-# import requests
-# import json
-
-# # Defining the api-endpoint
-# url = 'https://api.abuseipdb.com/api/v2/check'
-
-# querystring = {
-#     'ipAddress': '98.235.155.235',
-#     'maxAgeInDays': '90'
-# }
-
-# headers = {
-#     'Accept': 'application/json',
-#     'Key': '46734023e7372cbcfbc9ebad8ee4e92ee29a93963c65e9ced1781743dc08722212afa0dbbe5bc317'
-# }
-
-# response = requests.request(method='GET', url=url, headers=headers, params=querystring)
-
-# # Formatted output
-# decodedResponse = json.loads(response.text)
-# print(json.dumps(decodedResponse, sort_keys=True, indent=4))
+    # aipdb = query_abuseipdb(
+    #     indicator='99.12.13.4'
+    # )  
+    # print(aipdb)
